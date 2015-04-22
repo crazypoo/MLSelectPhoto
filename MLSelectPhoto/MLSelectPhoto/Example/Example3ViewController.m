@@ -1,23 +1,23 @@
 //
-//  Example1ViewController.m
+//  Example3ViewController.m
 //  MLSelectPhoto
 //
 //  Created by 张磊 on 15/4/22.
 //  Copyright (c) 2015年 com.zixue101.www. All rights reserved.
 //
 
-#import "Example1ViewController.h"
+#import "Example3ViewController.h"
 #import "ZLPhotoAssets.h"
 #import "ZLPhotoPickerAssetsViewController.h"
 
-@interface Example1ViewController () <UITableViewDataSource,UITableViewDelegate>
+@interface Example3ViewController () <UITableViewDataSource,UITableViewDelegate>
 
 @property (weak,nonatomic) UITableView *tableView;
 @property (nonatomic , strong) NSMutableArray *assets;
 
 @end
 
-@implementation Example1ViewController
+@implementation Example3ViewController
 
 #pragma mark - Getter
 #pragma mark Get data
@@ -61,6 +61,8 @@
     // 创建控制器
     ZLPhotoPickerViewController *pickerVc = [[ZLPhotoPickerViewController alloc] init];
     // 默认显示相册里面的内容SavePhotos
+    pickerVc.selectPickers = self.assets;
+    pickerVc.minCount = 9;
     pickerVc.status = PickerViewShowStatusCameraRoll;
     [pickerVc show];
     __weak typeof(self) weakSelf = self;
@@ -97,4 +99,5 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 95;
 }
+
 @end

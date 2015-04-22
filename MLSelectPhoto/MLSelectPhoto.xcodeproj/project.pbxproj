@@ -28,6 +28,8 @@
 		4800C7DB1AE749D9000CE211 /* ZLPhotoPickerGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4800C7CE1AE749D9000CE211 /* ZLPhotoPickerGroupTableViewCell.xib */; };
 		4800C7DC1AE749D9000CE211 /* ZLPhotoPickerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800C7D01AE749D9000CE211 /* ZLPhotoPickerImageView.m */; };
 		4800C7E01AE749FF000CE211 /* UIView+MLExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 4800C7DF1AE749FF000CE211 /* UIView+MLExtension.m */; };
+		48E27E3D1AE7534800526405 /* Example2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E27E3C1AE7534800526405 /* Example2ViewController.m */; };
+		48E27E401AE753B300526405 /* Example3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E27E3F1AE753B300526405 /* Example3ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,10 @@
 		4800C7DF1AE749FF000CE211 /* UIView+MLExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MLExtension.m"; sourceTree = "<group>"; };
 		4800C7E11AE74A0A000CE211 /* ZLPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPhoto.h; sourceTree = "<group>"; };
 		4800C7E21AE74A17000CE211 /* ZLPhotoPickerCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZLPhotoPickerCommon.h; sourceTree = "<group>"; };
+		48E27E3B1AE7534800526405 /* Example2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Example2ViewController.h; sourceTree = "<group>"; };
+		48E27E3C1AE7534800526405 /* Example2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Example2ViewController.m; sourceTree = "<group>"; };
+		48E27E3E1AE753B300526405 /* Example3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Example3ViewController.h; sourceTree = "<group>"; };
+		48E27E3F1AE753B300526405 /* Example3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Example3ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +175,10 @@
 			children = (
 				4800C7B11AE74975000CE211 /* Example1ViewController.h */,
 				4800C7B21AE74975000CE211 /* Example1ViewController.m */,
+				48E27E3B1AE7534800526405 /* Example2ViewController.h */,
+				48E27E3C1AE7534800526405 /* Example2ViewController.m */,
+				48E27E3E1AE753B300526405 /* Example3ViewController.h */,
+				48E27E3F1AE753B300526405 /* Example3ViewController.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -343,8 +353,10 @@
 				4800C7D71AE749D9000CE211 /* ZLPhotoPickerCollectionView.m in Sources */,
 				4800C7D51AE749D9000CE211 /* ZLPhotoPickerGroupViewController.m in Sources */,
 				4800C7D91AE749D9000CE211 /* ZLPhotoPickerFooterCollectionReusableView.m in Sources */,
+				48E27E401AE753B300526405 /* Example3ViewController.m in Sources */,
 				4800C7D61AE749D9000CE211 /* ZLPhotoPickerViewController.m in Sources */,
 				4800C7D21AE749D9000CE211 /* ZLPhotoPickerDatas.m in Sources */,
+				48E27E3D1AE7534800526405 /* Example2ViewController.m in Sources */,
 				4800C7921AE746F7000CE211 /* ViewController.m in Sources */,
 				4800C7DC1AE749D9000CE211 /* ZLPhotoPickerImageView.m in Sources */,
 				4800C78F1AE746F7000CE211 /* AppDelegate.m in Sources */,
@@ -550,6 +562,7 @@
 				4800C7AB1AE746F7000CE211 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4800C7AC1AE746F7000CE211 /* Build configuration list for PBXNativeTarget "MLSelectPhotoTests" */ = {
 			isa = XCConfigurationList;
@@ -558,6 +571,7 @@
 				4800C7AE1AE746F7000CE211 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
