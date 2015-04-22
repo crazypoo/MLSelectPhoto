@@ -73,7 +73,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 - (UIButton *)previewBtn{
     if (!_previewBtn) {
         UIButton *previewBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [previewBtn setTitleColor:[UIColor colorWithRed:0/255.0 green:91/255.0 blue:255/255.0 alpha:1.0] forState:UIControlStateNormal];
+        [previewBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [previewBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
         previewBtn.enabled = YES;
         previewBtn.titleLabel.font = [UIFont systemFontOfSize:17];

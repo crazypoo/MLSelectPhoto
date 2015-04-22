@@ -78,13 +78,19 @@
     _animationRightTick = animationRightTick;
     self.tickImageView.hidden = !animationRightTick;
     
-    [self.tickImageView.layer removeAllAnimations];
     CAKeyframeAnimation *scaoleAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
     scaoleAnimation.duration = 0.25;
     scaoleAnimation.autoreverses = YES;
     scaoleAnimation.values = @[[NSNumber numberWithFloat:1.0],[NSNumber numberWithFloat:1.2],[NSNumber numberWithFloat:1.0]];
     scaoleAnimation.fillMode = kCAFillModeForwards;
-    [self.tickImageView.layer addAnimation:scaoleAnimation forKey:@"transform.rotate"];
+    
+    if (self.isVideoType) {
+        [self.videoView.layer removeAllAnimations];
+        [self.videoView.layer addAnimation:scaoleAnimation forKey:@"transform.rotate"];
+    }else{
+        [self.tickImageView.layer removeAllAnimations];
+        [self.tickImageView.layer addAnimation:scaoleAnimation forKey:@"transform.rotate"];
+    }
     
 }
 @end
