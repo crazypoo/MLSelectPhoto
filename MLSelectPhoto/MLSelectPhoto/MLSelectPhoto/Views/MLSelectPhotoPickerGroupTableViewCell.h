@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class ZLPhotoPickerGroup;
+@class MLSelectPhotoPickerGroup;
 
-@interface ZLPhotoPickerGroupTableViewCell : UITableViewCell
+@interface MLSelectPhotoPickerGroupTableViewCell : UITableViewCell
 
 /**
  *  赋值xib
  */
-@property (nonatomic , strong) ZLPhotoPickerGroup *group;
+@property (nonatomic , strong) MLSelectPhotoPickerGroup *group;
 
 + (instancetype) instanceCell;
 

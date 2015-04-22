@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  ZLAssets.m
 //  ZLAssetsPickerDemo
@@ -6,9 +8,9 @@
 //  Copyright (c) 2015年 com.zixue101.www. All rights reserved.
 //
 
-#import "ZLPhotoAssets.h"
+#import "MLSelectPhotoAssets.h"
 
-@implementation ZLPhotoAssets
+@implementation MLSelectPhotoAssets
 
 - (UIImage *)thumbImage{
     return [UIImage imageWithCGImage:[self.asset thumbnail]];

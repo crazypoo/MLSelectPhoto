@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  ZLAssets.h
 //  ZLAssetsPickerDemo
@@ -9,7 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface ZLPhotoAssets : NSObject
+@interface MLSelectPhotoAssets : NSObject
 
 @property (strong,nonatomic) ALAsset *asset;
 /**

@@ -9,10 +9,11 @@
 #ifndef ZLAssetsPickerDemo_ZLPicker_h
 #define ZLAssetsPickerDemo_ZLPicker_h
 
-#import "ZLPhotoPickerAssetsViewController.h"
-#import "ZLPhotoPickerViewController.h"
-#import "ZLPhotoPickerDatas.h"
-#import "ZLPhotoPickerCommon.h"
+#import "MLSelectPhotoPickerAssetsViewController.h"
+#import "MLSelectPhotoPickerViewController.h"
+#import "MLSelectPhotoPickerDatas.h"
+#import "MLSelectPhotoAssets.h"
+#import "MLSelectPhotoCommon.h"
 #import "UIView+MLExtension.h"
 
 /**

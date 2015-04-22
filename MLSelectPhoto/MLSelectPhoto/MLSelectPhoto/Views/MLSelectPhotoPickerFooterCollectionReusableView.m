@@ -6,15 +6,14 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
-#import "ZLPhotoPickerFooterCollectionReusableView.h"
-#import "UIView+Extension.h"
+#import "MLSelectPhotoPickerFooterCollectionReusableView.h"
 
-@interface ZLPhotoPickerFooterCollectionReusableView ()
+@interface MLSelectPhotoPickerFooterCollectionReusableView ()
 @property (weak, nonatomic) UILabel *footerLabel;
 
 @end
 
-@implementation ZLPhotoPickerFooterCollectionReusableView
+@implementation MLSelectPhotoPickerFooterCollectionReusableView
 
 - (UILabel *)footerLabel{
     if (!_footerLabel) {
@@ -24,13 +23,11 @@
         [self addSubview:footerLabel];
         self.footerLabel = footerLabel;
     }
-    
     return _footerLabel;
 }
 
 - (void)setCount:(NSInteger)count{
     _count = count;
-    
     if (count > 0) {
         self.footerLabel.text = [NSString stringWithFormat:@"有 %ld 张图片", (long)count];
     }

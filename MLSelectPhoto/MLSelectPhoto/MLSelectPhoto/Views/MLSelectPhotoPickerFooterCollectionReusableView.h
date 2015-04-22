@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZLPhotoPickerFooterCollectionReusableView : UICollectionReusableView
-
+@interface MLSelectPhotoPickerFooterCollectionReusableView : UICollectionReusableView
 @property (nonatomic , assign) NSInteger count;
-
 @end

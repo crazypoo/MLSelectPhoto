@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  UIView+Extension.m
 //
@@ -17,7 +19,7 @@
 - (CGFloat)ml_x{
     return self.frame.origin.x;
 }
-- (void)setMl_Y:(CGFloat)y{
+- (void)setMl_y:(CGFloat)y{
     CGRect frame = self.frame;
     frame.origin.y = y;
     self.frame = frame;
@@ -25,7 +27,7 @@
 - (CGFloat)ml_y{
     return self.frame.origin.y;
 }
-- (void)setMl_CenterX:(CGFloat)centerX{
+- (void)setMl_centerX:(CGFloat)centerX{
     CGPoint center = self.center;
     center.x = centerX;
     self.center = center;
@@ -34,7 +36,7 @@
     return self.center.x;
 }
 
-- (void)setMl_CenterY:(CGFloat)centerY{
+- (void)setMl_centerY:(CGFloat)centerY{
     CGPoint center = self.center;
     center.y = centerY;
     self.center = center;
@@ -43,7 +45,7 @@
     return self.center.y;
 }
 
-- (void)setMl_Width:(CGFloat)width{
+- (void)setMl_width:(CGFloat)width{
     CGRect frame = self.frame;
     frame.size.width = width;
     self.frame = frame;
@@ -52,7 +54,7 @@
     return self.frame.size.width;
 }
 
-- (void)setMl_Height:(CGFloat)height{
+- (void)setMl_height:(CGFloat)height{
     CGRect frame = self.frame;
     frame.size.height = height;
     self.frame = frame;
@@ -62,7 +64,7 @@
 }
 
 
-- (void)setMl_Size:(CGSize)size{
+- (void)setMl_size:(CGSize)size{
     CGRect frame = self.frame;
     frame.size = size;
     self.frame = frame;

@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  PickerDatas.h
 //  相册Demo
@@ -8,12 +10,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class ZLPhotoPickerGroup;
+@class MLSelectPhotoPickerGroup;
 
 // 回调
 typedef void(^callBackBlock)(id obj);
 
-@interface ZLPhotoPickerDatas : NSObject
+@interface MLSelectPhotoPickerDatas : NSObject
 
 /**
  *  获取所有组
@@ -33,7 +35,7 @@ typedef void(^callBackBlock)(id obj);
 /**
  *  传入一个组获取组里面的Asset
  */
-- (void) getGroupPhotosWithGroup : (ZLPhotoPickerGroup *) pickerGroup finished : (callBackBlock ) callBack;
+- (void) getGroupPhotosWithGroup : (MLSelectPhotoPickerGroup *) pickerGroup finished : (callBackBlock ) callBack;
 
 /**
  *  传入一个AssetsURL来获取UIImage

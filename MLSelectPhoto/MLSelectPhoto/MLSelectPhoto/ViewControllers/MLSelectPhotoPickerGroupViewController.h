@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZLPhotoPickerViewController.h"
+#import "MLSelectPhotoPickerViewController.h"
 
-@interface ZLPhotoPickerGroupViewController : UIViewController
+@interface MLSelectPhotoPickerGroupViewController : UIViewController
 
 @property (nonatomic , weak) id<ZLPhotoPickerViewControllerDelegate> delegate;
 @property (nonatomic , assign) PickerViewShowStatus status;

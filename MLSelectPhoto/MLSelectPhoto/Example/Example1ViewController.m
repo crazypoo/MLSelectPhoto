@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  Example1ViewController.m
 //  MLSelectPhoto
@@ -7,8 +9,8 @@
 //
 
 #import "Example1ViewController.h"
-#import "ZLPhotoAssets.h"
-#import "ZLPhotoPickerAssetsViewController.h"
+#import "MLSelectPhotoAssets.h"
+#import "MLSelectPhotoPickerAssetsViewController.h"
 
 @interface Example1ViewController () <UITableViewDataSource,UITableViewDelegate>
 
@@ -59,9 +61,10 @@
 #pragma mark - 选择相册
 - (void)selectPhotos {
     // 创建控制器
-    ZLPhotoPickerViewController *pickerVc = [[ZLPhotoPickerViewController alloc] init];
+    MLSelectPhotoPickerViewController *pickerVc = [[MLSelectPhotoPickerViewController alloc] init];
     // 默认显示相册里面的内容SavePhotos
     pickerVc.status = PickerViewShowStatusCameraRoll;
+    pickerVc.minCount = 9;
     [pickerVc show];
     __weak typeof(self) weakSelf = self;
     pickerVc.callBack = ^(NSArray *assets){
@@ -79,8 +82,8 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     // 判断类型来获取Image
-    ZLPhotoAssets *asset = self.assets[indexPath.row];
-    if ([asset isKindOfClass:[ZLPhotoAssets class]]) {
+    MLSelectPhotoAssets *asset = self.assets[indexPath.row];
+    if ([asset isKindOfClass:[MLSelectPhotoAssets class]]) {
         cell.imageView.image = asset.thumbImage;
     }else if([asset isKindOfClass:[UIImage class]]){
         cell.imageView.image = (UIImage *)asset;

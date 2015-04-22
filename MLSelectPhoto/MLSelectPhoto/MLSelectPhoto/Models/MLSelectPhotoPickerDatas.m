@@ -6,15 +6,15 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
-#import "ZLPhotoPickerDatas.h"
-#import "ZLPhotoPickerGroup.h"
+#import "MLSelectPhotoPickerDatas.h"
+#import "MLSelectPhotoPickerGroup.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface ZLPhotoPickerDatas ()
+@interface MLSelectPhotoPickerDatas ()
 @property (nonatomic , strong) ALAssetsLibrary *library;
 @end
 
-@implementation ZLPhotoPickerDatas
+@implementation MLSelectPhotoPickerDatas
 
 + (ALAssetsLibrary *)defaultAssetsLibrary
 {
@@ -57,7 +57,7 @@
                 [group setAssetsFilter:[ALAssetsFilter allVideos]];
             }
             // 包装一个模型来赋值
-            ZLPhotoPickerGroup *pickerGroup = [[ZLPhotoPickerGroup alloc] init];
+            MLSelectPhotoPickerGroup *pickerGroup = [[MLSelectPhotoPickerGroup alloc] init];
             pickerGroup.group = group;
             pickerGroup.groupName = [group valueForProperty:@"ALAssetsGroupPropertyName"];
             pickerGroup.thumbImage = [UIImage imageWithCGImage:[group posterImage]];
@@ -81,7 +81,7 @@
 }
 
 #pragma mark -传入一个组获取组里面的Asset
-- (void) getGroupPhotosWithGroup : (ZLPhotoPickerGroup *) pickerGroup finished : (callBackBlock ) callBack{
+- (void) getGroupPhotosWithGroup : (MLSelectPhotoPickerGroup *) pickerGroup finished : (callBackBlock ) callBack{
     
     NSMutableArray *assets = [NSMutableArray array];
     ALAssetsGroupEnumerationResultsBlock result = ^(ALAsset *asset , NSUInteger index , BOOL *stop){

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZLPhotoAssets.h"
+#import "MLSelectPhotoAssets.h"
 
 // 展示状态
 typedef NS_ENUM(NSUInteger, ZLPickerCollectionViewShowOrderStatus){
@@ -15,13 +15,13 @@ typedef NS_ENUM(NSUInteger, ZLPickerCollectionViewShowOrderStatus){
     ZLPickerCollectionViewShowOrderStatusTimeAsc // 降序
 };
 
-@class ZLPhotoPickerCollectionView;
+@class MLSelectPhotoPickerCollectionView;
 @protocol ZLPhotoPickerCollectionViewDelegate <NSObject>
 // 选择相片就会调用
-- (void) pickerCollectionViewDidSelected:(ZLPhotoPickerCollectionView *) pickerCollectionView deleteAsset:(ZLPhotoAssets *)deleteAssets;
+- (void) pickerCollectionViewDidSelected:(MLSelectPhotoPickerCollectionView *) pickerCollectionView deleteAsset:(MLSelectPhotoAssets *)deleteAssets;
 @end
 
-@interface ZLPhotoPickerCollectionView : UICollectionView
+@interface MLSelectPhotoPickerCollectionView : UICollectionView
 
 @property (nonatomic , assign) ZLPickerCollectionViewShowOrderStatus status;
 // 保存所有的数据

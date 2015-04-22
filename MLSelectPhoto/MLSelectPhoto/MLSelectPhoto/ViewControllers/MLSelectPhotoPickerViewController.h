@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger , PickerViewShowStatus) {
 - (void) pickerViewControllerDoneAsstes : (NSArray *) assets;
 @end
 
-@interface ZLPhotoPickerViewController : UIViewController
+@interface MLSelectPhotoPickerViewController : UIViewController
 
 // @optional
 @property (nonatomic , weak) id<ZLPhotoPickerViewControllerDelegate> delegate;

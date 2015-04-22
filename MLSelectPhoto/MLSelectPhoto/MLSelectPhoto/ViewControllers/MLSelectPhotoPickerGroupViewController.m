@@ -11,24 +11,24 @@
 #define CELL_LINE_MARGIN 5
 
 
-#import "ZLPhotoPickerGroupViewController.h"
-#import "ZLPhotoPickerCollectionView.h"
-#import "ZLPhotoPickerDatas.h"
-#import "ZLPhotoPickerGroupViewController.h"
-#import "ZLPhotoPickerGroup.h"
-#import "ZLPhotoPickerGroupTableViewCell.h"
-#import "ZLPhotoPickerAssetsViewController.h"
+#import "MLSelectPhotoPickerGroupViewController.h"
+#import "MLSelectPhotoPickerCollectionView.h"
+#import "MLSelectPhotoPickerDatas.h"
+#import "MLSelectPhotoPickerGroupViewController.h"
+#import "MLSelectPhotoPickerGroup.h"
+#import "MLSelectPhotoPickerGroupTableViewCell.h"
+#import "MLSelectPhotoPickerAssetsViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface ZLPhotoPickerGroupViewController () <UITableViewDataSource,UITableViewDelegate>
-@property (nonatomic , weak) ZLPhotoPickerAssetsViewController *collectionVc;
+@interface MLSelectPhotoPickerGroupViewController () <UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic , weak) MLSelectPhotoPickerAssetsViewController *collectionVc;
 
 @property (nonatomic , weak) UITableView *tableView;
 @property (nonatomic , strong) NSArray *groups;
 
 @end
 
-@implementation ZLPhotoPickerGroupViewController
+@implementation MLSelectPhotoPickerGroupViewController
 
 - (UITableView *)tableView{
     if (!_tableView) {
@@ -77,8 +77,7 @@
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    ZLPhotoPickerGroupTableViewCell *cell = [ZLPhotoPickerGroupTableViewCell instanceCell];
-    
+    MLSelectPhotoPickerGroupTableViewCell *cell = [MLSelectPhotoPickerGroupTableViewCell instanceCell];
     cell.group = self.groups[indexPath.row];
     
     return cell;
@@ -88,8 +87,8 @@
 #pragma mark 跳转到控制器里面的内容
 - (void) jump2StatusVc{
     // 如果是相册
-    ZLPhotoPickerGroup *gp = nil;
-    for (ZLPhotoPickerGroup *group in self.groups) {
+    MLSelectPhotoPickerGroup *gp = nil;
+    for (MLSelectPhotoPickerGroup *group in self.groups) {
         if ((self.status == PickerViewShowStatusCameraRoll || self.status == PickerViewShowStatusVideo) && ([group.groupName isEqualToString:@"Camera Roll"] || [group.groupName isEqualToString:@"相机胶卷"])) {
             gp = group;
             break;
@@ -104,7 +103,7 @@
     
     if (!gp) return ;
     
-    ZLPhotoPickerAssetsViewController *assetsVc = [[ZLPhotoPickerAssetsViewController alloc] init];
+    MLSelectPhotoPickerAssetsViewController *assetsVc = [[MLSelectPhotoPickerAssetsViewController alloc] init];
     assetsVc.selectPickerAssets = self.selectAsstes;
     assetsVc.assetsGroup = gp;
     assetsVc.groupVc = self;
@@ -120,8 +119,8 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ZLPhotoPickerGroup *group = self.groups[indexPath.row];
-    ZLPhotoPickerAssetsViewController *assetsVc = [[ZLPhotoPickerAssetsViewController alloc] init];
+    MLSelectPhotoPickerGroup *group = self.groups[indexPath.row];
+    MLSelectPhotoPickerAssetsViewController *assetsVc = [[MLSelectPhotoPickerAssetsViewController alloc] init];
     assetsVc.selectPickerAssets = self.selectAsstes;
     assetsVc.groupVc = self;
     assetsVc.assetsGroup = group;
@@ -132,7 +131,7 @@
 #pragma mark -<Images Datas>
 
 -(void)getImgs{
-    ZLPhotoPickerDatas *datas = [ZLPhotoPickerDatas defaultPicker];
+    MLSelectPhotoPickerDatas *datas = [MLSelectPhotoPickerDatas defaultPicker];
     
     __weak typeof(self) weakSelf = self;
     

@@ -6,22 +6,19 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
-#import "ZLPhotoPickerGroupTableViewCell.h"
-#import "ZLPhotoPickerGroup.h"
+#import "MLSelectPhotoPickerGroupTableViewCell.h"
+#import "MLSelectPhotoPickerGroup.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface ZLPhotoPickerGroupTableViewCell ()
-
+@interface MLSelectPhotoPickerGroupTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *groupImageView;
 @property (weak, nonatomic) IBOutlet UILabel *groupNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *groupPicCountLabel;
-
-
 @end
 
-@implementation ZLPhotoPickerGroupTableViewCell
+@implementation MLSelectPhotoPickerGroupTableViewCell
 
-- (void)setGroup:(ZLPhotoPickerGroup *)group{
+- (void)setGroup:(MLSelectPhotoPickerGroup *)group{
     _group = group;
     
     self.groupNameLabel.text = group.groupName;

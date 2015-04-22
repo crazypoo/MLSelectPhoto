@@ -6,14 +6,14 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
-#import "ZLPhotoPickerViewController.h"
-#import "ZLPhoto.h"
+#import "MLSelectPhotoPickerViewController.h"
+#import "MLSelectPhoto.h"
 
-@interface ZLPhotoPickerViewController ()
-@property (nonatomic , weak) ZLPhotoPickerGroupViewController *groupVc;
+@interface MLSelectPhotoPickerViewController ()
+@property (nonatomic , weak) MLSelectPhotoPickerGroupViewController *groupVc;
 @end
 
-@implementation ZLPhotoPickerViewController
+@implementation MLSelectPhotoPickerViewController
 
 #pragma mark - Life cycle
 - (void)viewDidLoad {
@@ -28,7 +28,7 @@
 
 #pragma mark - init Action
 - (void) createNavigationController{
-    ZLPhotoPickerGroupViewController *groupVc = [[ZLPhotoPickerGroupViewController alloc] init];
+    MLSelectPhotoPickerGroupViewController *groupVc = [[MLSelectPhotoPickerGroupViewController alloc] init];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:groupVc];
     nav.view.frame = self.view.bounds;
     [self addChildViewController:nav];

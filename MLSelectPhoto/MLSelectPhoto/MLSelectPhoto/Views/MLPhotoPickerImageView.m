@@ -6,9 +6,10 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
-#import "ZLPhotoPickerImageView.h"
+#import "MLPhotoPickerImageView.h"
+#import "MLSelectPhotoCommon.h"
 
-@interface ZLPhotoPickerImageView ()
+@interface MLPhotoPickerImageView ()
 
 @property (nonatomic , weak) UIView *maskView;
 @property (nonatomic , weak) UIImageView *tickImageView;
@@ -16,7 +17,7 @@
 
 @end
 
-@implementation ZLPhotoPickerImageView
+@implementation MLPhotoPickerImageView
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -42,7 +43,7 @@
 - (UIImageView *)videoView{
     if (!_videoView) {
         UIImageView *videoView = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.bounds.size.height - 40, 30, 30)];
-        videoView.image = [UIImage imageNamed:@"video"];
+        videoView.image = [UIImage imageNamed:MLSelectPhotoSrcName(@"video")];
         videoView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:videoView];
         self.videoView = videoView;
@@ -54,7 +55,7 @@
     if (!_tickImageView) {
         UIImageView *tickImageView = [[UIImageView alloc] init];
         tickImageView.frame = CGRectMake(self.bounds.size.width - 40, 0, 40, 40);
-        tickImageView.image = [UIImage imageNamed:@"AssetsPickerChecked"];
+        tickImageView.image = [UIImage imageNamed:MLSelectPhotoSrcName(@"AssetsPickerChecked")];
         tickImageView.hidden = YES;
         [self addSubview:tickImageView];
         self.tickImageView = tickImageView;

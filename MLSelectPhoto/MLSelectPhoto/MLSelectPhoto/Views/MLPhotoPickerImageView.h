@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZLPhotoPickerImageView : UIImageView
+@interface MLPhotoPickerImageView : UIImageView
 
 /**
  *  是否有蒙版层

@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZLPhotoPickerCommon.h"
-#import "ZLPhotoPickerGroupViewController.h"
+#import "MLSelectPhotoCommon.h"
+#import "MLSelectPhotoPickerGroupViewController.h"
 
-@class ZLPhotoPickerGroup;
+@class MLSelectPhotoPickerGroup;
 
-@interface ZLPhotoPickerAssetsViewController : UIViewController
+@interface MLSelectPhotoPickerAssetsViewController : UIViewController
 
-@property (strong,nonatomic) ZLPhotoPickerGroupViewController *groupVc;
+@property (strong,nonatomic) MLSelectPhotoPickerGroupViewController *groupVc;
 @property (nonatomic , assign) PickerViewShowStatus status;
-@property (nonatomic , strong) ZLPhotoPickerGroup *assetsGroup;
+@property (nonatomic , strong) MLSelectPhotoPickerGroup *assetsGroup;
 @property (nonatomic , assign) NSInteger minCount;
 // 需要记录选中的值的数据
 @property (strong,nonatomic) NSArray *selectPickerAssets;

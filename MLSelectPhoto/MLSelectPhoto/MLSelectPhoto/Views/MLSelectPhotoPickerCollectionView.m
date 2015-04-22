@@ -6,24 +6,23 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
-#import "ZLPhotoPickerCollectionView.h"
-#import "ZLPhotoPickerCollectionViewCell.h"
-#import "ZLPhotoPickerImageView.h"
-#import "ZLPhotoPickerFooterCollectionReusableView.h"
+#import "MLSelectPhotoPickerCollectionView.h"
+#import "MLSelectPhotoPickerCollectionViewCell.h"
+#import "MLPhotoPickerImageView.h"
+#import "MLSelectPhotoPickerFooterCollectionReusableView.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "ZLPhotoAssets.h"
-#import "ZLPhoto.h"
+#import "MLSelectPhoto.h"
 
-@interface ZLPhotoPickerCollectionView () <UICollectionViewDataSource,UICollectionViewDelegate>
+@interface MLSelectPhotoPickerCollectionView () <UICollectionViewDataSource,UICollectionViewDelegate>
 
-@property (nonatomic , strong) ZLPhotoPickerFooterCollectionReusableView *footerView;
+@property (nonatomic , strong) MLSelectPhotoPickerFooterCollectionReusableView *footerView;
 
 // 判断是否是第一次加载
 @property (nonatomic , assign , getter=isFirstLoadding) BOOL firstLoadding;
 
 @end
 
-@implementation ZLPhotoPickerCollectionView
+@implementation MLSelectPhotoPickerCollectionView
 
 #pragma mark -getter
 - (NSMutableArray *)selectsIndexPath{
@@ -40,8 +39,8 @@
     // 需要记录选中的值的数据
     if (self.isRecoderSelectPicker){
         NSMutableArray *selectAssets = [NSMutableArray array];
-        for (ZLPhotoAssets *asset in self.selectAsstes) {
-            for (ZLPhotoAssets *asset2 in self.dataArray) {
+        for (MLSelectPhotoAssets *asset in self.selectAsstes) {
+            for (MLSelectPhotoAssets *asset2 in self.dataArray) {
                 if ([asset.asset.defaultRepresentation.url isEqual:asset2.asset.defaultRepresentation.url]) {
                     [selectAssets addObject:asset2];
                     break;
@@ -76,14 +75,14 @@
 
 - (UICollectionViewCell *) collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    ZLPhotoPickerCollectionViewCell *cell = [ZLPhotoPickerCollectionViewCell cellWithCollectionView:collectionView cellForItemAtIndexPath:indexPath];
+    MLSelectPhotoPickerCollectionViewCell *cell = [MLSelectPhotoPickerCollectionViewCell cellWithCollectionView:collectionView cellForItemAtIndexPath:indexPath];
     
-    ZLPhotoPickerImageView *cellImgView = [[ZLPhotoPickerImageView alloc] initWithFrame:cell.bounds];
+    MLPhotoPickerImageView *cellImgView = [[MLPhotoPickerImageView alloc] initWithFrame:cell.bounds];
     cellImgView.maskViewFlag = YES;
     
     // 需要记录选中的值的数据
     if (self.isRecoderSelectPicker) {
-        for (ZLPhotoAssets *asset in self.selectAsstes) {
+        for (MLSelectPhotoAssets *asset in self.selectAsstes) {
             if ([asset.asset.defaultRepresentation.url isEqual:[self.dataArray[indexPath.item] asset].defaultRepresentation.url]) {
                 [self.selectsIndexPath addObject:@(indexPath.row)];
             }
@@ -94,9 +93,9 @@
     
     cellImgView.maskViewFlag = ([self.selectsIndexPath containsObject:@(indexPath.row)]);
     
-    ZLPhotoAssets *asset = self.dataArray[indexPath.item];
+    MLSelectPhotoAssets *asset = self.dataArray[indexPath.item];
     cellImgView.isVideoType = asset.isVideoType;
-    if ([asset isKindOfClass:[ZLPhotoAssets class]]) {
+    if ([asset isKindOfClass:[MLSelectPhotoAssets class]]) {
         cellImgView.image = asset.thumbImage;
     }
     
@@ -110,10 +109,10 @@
         self.lastDataArray = [NSMutableArray array];
     }
     
-    ZLPhotoPickerCollectionViewCell *cell = (ZLPhotoPickerCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
+    MLSelectPhotoPickerCollectionViewCell *cell = (MLSelectPhotoPickerCollectionViewCell *) [collectionView cellForItemAtIndexPath:indexPath];
     
-    ZLPhotoAssets *asset = self.dataArray[indexPath.row];
-    ZLPhotoPickerImageView *pickerImageView = [cell.contentView.subviews lastObject];
+    MLSelectPhotoAssets *asset = self.dataArray[indexPath.row];
+    MLPhotoPickerImageView *pickerImageView = [cell.contentView.subviews lastObject];
     // 如果没有就添加到数组里面，存在就移除
     if (pickerImageView.isMaskViewFlag) {
         [self.selectsIndexPath removeObject:@(indexPath.row)];
@@ -147,7 +146,7 @@
         }
     }
     
-    pickerImageView.maskViewFlag = ([pickerImageView isKindOfClass:[ZLPhotoPickerImageView class]]) && !pickerImageView.isMaskViewFlag;
+    pickerImageView.maskViewFlag = ([pickerImageView isKindOfClass:[MLPhotoPickerImageView class]]) && !pickerImageView.isMaskViewFlag;
     
     
 }
@@ -155,9 +154,9 @@
 #pragma mark 底部View
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    ZLPhotoPickerFooterCollectionReusableView *reusableView = nil;
+    MLSelectPhotoPickerFooterCollectionReusableView *reusableView = nil;
     if (kind == UICollectionElementKindSectionFooter) {
-        ZLPhotoPickerFooterCollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
+        MLSelectPhotoPickerFooterCollectionReusableView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
         footerView.count = self.dataArray.count;
         reusableView = footerView;
         self.footerView = footerView;

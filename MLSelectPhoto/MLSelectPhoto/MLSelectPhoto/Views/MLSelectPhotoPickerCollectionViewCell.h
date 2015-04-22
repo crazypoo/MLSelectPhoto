@@ -10,7 +10,7 @@
 
 @class UICollectionView;
 
-@interface ZLPhotoPickerCollectionViewCell : UICollectionViewCell
+@interface MLSelectPhotoPickerCollectionViewCell : UICollectionViewCell
 + (instancetype) cellWithCollectionView : (UICollectionView *) collectionView cellForItemAtIndexPath:(NSIndexPath *) indexPath;
 
 @property (nonatomic , strong) UIImage *cellImage;
