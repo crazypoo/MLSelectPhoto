@@ -42,10 +42,4 @@ typedef void(^callBackBlock)(id obj);
  */
 - (void) getAssetsPhotoWithURLs:(NSURL *) url callBack:(callBackBlock ) callBack;
 
-/**
- *  传入一个图片对象（ALAsset、URL）
- *
- *  @return 返回图片
- */
-- (UIImage *) getImageWithImageObj:(id)imageObj;
 @end

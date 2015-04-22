@@ -43,4 +43,11 @@ typedef NS_ENUM(NSInteger , PickerViewShowStatus) {
 // 展示控制器
 - (void)show;
 
+/**
+ *  传入一个图片对象（ALAsset、URL）
+ *
+ *  @return 返回图片
+ */
++ (UIImage *) getImageWithImageObj:(id)imageObj;
+
 @end

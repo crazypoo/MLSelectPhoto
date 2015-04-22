@@ -89,4 +89,18 @@
     _delegate = delegate;
     self.groupVc.delegate = delegate;
 }
+
+#pragma mark - 通过传入一个图片对象（MLSelectPhotoAssets/ALAsset）获取一张缩略图
++ (UIImage *) getImageWithImageObj:(id)imageObj{
+    __block UIImage *image = nil;
+    if ([imageObj isKindOfClass:[UIImage class]]) {
+        return imageObj;
+    }else if ([imageObj isKindOfClass:[ALAsset class]]){
+        ALAsset *asset = (ALAsset *)imageObj;
+        return [UIImage imageWithCGImage:[[asset defaultRepresentation] fullScreenImage]];
+    }else if ([imageObj isKindOfClass:[MLSelectPhotoAssets class]]){
+        return [imageObj thumbImage];
+    }
+    return image;
+}
 @end
