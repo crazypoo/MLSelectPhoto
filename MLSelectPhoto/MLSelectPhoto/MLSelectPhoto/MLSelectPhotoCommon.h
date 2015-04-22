@@ -14,6 +14,11 @@
 // 图片最多显示9张，超过9张取消单击事件
 static NSInteger const KPhotoShowMaxCount = 9;
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+
 #define iOS7gt ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0)
 
 // NSNotification

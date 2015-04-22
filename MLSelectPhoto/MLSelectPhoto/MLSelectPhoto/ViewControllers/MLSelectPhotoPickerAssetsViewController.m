@@ -22,6 +22,7 @@ static CGFloat TOOLBAR_HEIGHT = 44;
 static NSString *const _cellIdentifier = @"cell";
 static NSString *const _footerIdentifier = @"FooterView";
 static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
+
 @interface MLSelectPhotoPickerAssetsViewController () <ZLPhotoPickerCollectionViewDelegate>
 
 // View
