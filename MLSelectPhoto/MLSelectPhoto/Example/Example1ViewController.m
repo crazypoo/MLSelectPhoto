@@ -83,11 +83,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     // 判断类型来获取Image
     MLSelectPhotoAssets *asset = self.assets[indexPath.row];
-    if ([asset isKindOfClass:[MLSelectPhotoAssets class]]) {
-        cell.imageView.image = asset.thumbImage;
-    }else if([asset isKindOfClass:[UIImage class]]){
-        cell.imageView.image = (UIImage *)asset;
-    }
+    cell.imageView.image = [MLSelectPhotoPickerViewController getImageWithImageObj:asset];
     
     return cell;
 }

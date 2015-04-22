@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  Example4ViewController.m
 //  MLSelectPhoto
@@ -57,16 +59,16 @@
 }
 
 - (void) setupButtons{
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"选择视频" style:UIBarButtonItemStyleDone target:self action:@selector(selectPhotos)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"selectVideos" style:UIBarButtonItemStyleDone target:self action:@selector(selectVideos)];
 }
 
 
 #pragma mark - select Photo Library
-- (void)selectPhotos {
+- (void)selectVideos {
     // 创建控制器
     MLSelectPhotoPickerViewController *pickerVc = [[MLSelectPhotoPickerViewController alloc] init];
-    // 默认显示相册里面的内容SavePhotos
-    // 最多能选9张图片
+    // 默认显示相册里面的视频
+    // 最多能选9个视频
     pickerVc.minCount = 9;
     pickerVc.status = PickerViewShowStatusVideo;
     [pickerVc show];
@@ -95,13 +97,9 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
+    // 判断类型来获取Image
     MLSelectPhotoAssets *asset = self.assets[indexPath.row];
-    if ([asset isKindOfClass:[MLSelectPhotoAssets class]]) {
-        cell.imageView.image = asset.thumbImage;
-    }else if([asset isKindOfClass:[UIImage class]]){
-        cell.imageView.image = (UIImage *)asset;
-    }
+    cell.imageView.image = [MLSelectPhotoPickerViewController getImageWithImageObj:asset];
     
     return cell;
 }

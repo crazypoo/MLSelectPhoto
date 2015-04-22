@@ -49,6 +49,8 @@
 #pragma mark - <UITableViewDelegate>
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     // push Example vc.
-    [self.navigationController pushViewController:[[NSClassFromString([NSString stringWithFormat:@"Example%ldViewController",indexPath.row+1]) alloc] init] animated:YES];
+    UIViewController *exampleVc = [[NSClassFromString([NSString stringWithFormat:@"Example%ldViewController",indexPath.row+1]) alloc] init];
+    exampleVc.title = self.examples[indexPath.row];
+    [self.navigationController pushViewController:exampleVc animated:YES];
 }
 @end

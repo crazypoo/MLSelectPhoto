@@ -32,6 +32,7 @@
 		48E27E401AE753B300526405 /* Example3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E27E3F1AE753B300526405 /* Example3ViewController.m */; };
 		48E27E611AE793F800526405 /* MLSelectPhoto.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 48E27E601AE793F800526405 /* MLSelectPhoto.bundle */; };
 		48E27E661AE7B5BF00526405 /* Example4ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E27E651AE7B5BF00526405 /* Example4ViewController.m */; };
+		48E27E691AE7F68B00526405 /* MLSelectPhotoNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48E27E681AE7F68B00526405 /* MLSelectPhotoNavigationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,8 @@
 		48E27E601AE793F800526405 /* MLSelectPhoto.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MLSelectPhoto.bundle; sourceTree = "<group>"; };
 		48E27E641AE7B5BF00526405 /* Example4ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Example4ViewController.h; sourceTree = "<group>"; };
 		48E27E651AE7B5BF00526405 /* Example4ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Example4ViewController.m; sourceTree = "<group>"; };
+		48E27E671AE7F68B00526405 /* MLSelectPhotoNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MLSelectPhotoNavigationViewController.h; sourceTree = "<group>"; };
+		48E27E681AE7F68B00526405 /* MLSelectPhotoNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MLSelectPhotoNavigationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +229,8 @@
 				4800C7C21AE749D9000CE211 /* MLSelectPhotoPickerGroupViewController.m */,
 				4800C7C31AE749D9000CE211 /* MLSelectPhotoPickerViewController.h */,
 				4800C7C41AE749D9000CE211 /* MLSelectPhotoPickerViewController.m */,
+				48E27E671AE7F68B00526405 /* MLSelectPhotoNavigationViewController.h */,
+				48E27E681AE7F68B00526405 /* MLSelectPhotoNavigationViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -366,6 +371,7 @@
 				4800C7D61AE749D9000CE211 /* MLSelectPhotoPickerViewController.m in Sources */,
 				4800C7D21AE749D9000CE211 /* MLSelectPhotoPickerDatas.m in Sources */,
 				48E27E3D1AE7534800526405 /* Example2ViewController.m in Sources */,
+				48E27E691AE7F68B00526405 /* MLSelectPhotoNavigationViewController.m in Sources */,
 				4800C7921AE746F7000CE211 /* ViewController.m in Sources */,
 				4800C7DC1AE749D9000CE211 /* MLPhotoPickerImageView.m in Sources */,
 				4800C78F1AE746F7000CE211 /* AppDelegate.m in Sources */,
