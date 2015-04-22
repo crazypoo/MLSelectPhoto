@@ -7,32 +7,96 @@
 //
 
 #import "Example1ViewController.h"
+#import "ZLPhotoAssets.h"
+#import "ZLPhotoPickerAssetsViewController.h"
 
-@interface Example1ViewController ()
+@interface Example1ViewController () <UITableViewDataSource,UITableViewDelegate>
+
+@property (weak,nonatomic) UITableView *tableView;
+@property (nonatomic , strong) NSMutableArray *assets;
 
 @end
 
 @implementation Example1ViewController
 
-- (void)viewDidLoad {
+#pragma mark - Getter
+#pragma mark Get data
+- (NSMutableArray *)assets{
+    if (!_assets) {
+        _assets = [NSMutableArray array];
+    }
+    return _assets;
+}
+
+#pragma mark Get View
+- (UITableView *)tableView{
+    if (!_tableView) {
+        UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        tableView.backgroundColor = [UIColor whiteColor];
+        tableView.dataSource = self;
+        tableView.delegate = self;
+        tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+        [self.view addSubview:tableView];
+        self.tableView = tableView;
+    }
+    return _tableView;
+}
+
+- (void)viewDidLoad{
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
+    // 初始化UI
+    [self setupButtons];
+    [self tableView];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) setupButtons{
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"selectPhotos" style:UIBarButtonItemStyleDone target:self action:@selector(selectPhotos)];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - 选择相册
+- (void)selectPhotos {
+    // 创建控制器
+    ZLPhotoPickerViewController *pickerVc = [[ZLPhotoPickerViewController alloc] init];
+    // 默认显示相册里面的内容SavePhotos
+    // 最多能选9张图片
+    pickerVc.minCount = 20;
+    pickerVc.status = PickerViewShowStatusCameraRoll;
+    [pickerVc show];
+    __weak typeof(self) weakSelf = self;
+    pickerVc.callBack = ^(NSArray *assets){
+        [weakSelf.assets addObjectsFromArray:assets];
+        [weakSelf.tableView reloadData];
+    };
 }
-*/
 
+#pragma mark - <UITableViewDataSource>
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.assets.count;
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    // 判断类型来获取Image
+    ZLPhotoAssets *asset = self.assets[indexPath.row];
+    if ([asset isKindOfClass:[ZLPhotoAssets class]]) {
+        cell.imageView.image = asset.thumbImage;
+    }else if([asset isKindOfClass:[UIImage class]]){
+        cell.imageView.image = (UIImage *)asset;
+    }
+    
+    return cell;
+}
+
+#pragma mark - <UITableViewDelegate>
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 95;
+}
 @end
