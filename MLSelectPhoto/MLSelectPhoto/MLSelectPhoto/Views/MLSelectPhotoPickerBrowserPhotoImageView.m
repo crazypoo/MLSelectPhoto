@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  ZLPhotoPickerBrowserPhotoImageView.m
 //  ZLAssetsPickerDemo
@@ -6,9 +8,9 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
-#import "ZLPhotoPickerBrowserPhotoImageView.h"
+#import "MLSelectPhotoPickerBrowserPhotoImageView.h"
 
-@implementation ZLPhotoPickerBrowserPhotoImageView
+@implementation MLSelectPhotoPickerBrowserPhotoImageView
 
 - (id)initWithFrame:(CGRect)frame {
 	if ((self = [super initWithFrame:frame])) {

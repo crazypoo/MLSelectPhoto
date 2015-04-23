@@ -264,7 +264,6 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 - (void)preview{
     MLSelectPhotoBrowserViewController *browserVc = [[MLSelectPhotoBrowserViewController alloc] init];
     browserVc.photos = self.selectAssets;
-    browserVc.title = @"Browser Photos.";
     [self.navigationController pushViewController:browserVc animated:YES];
 }
 

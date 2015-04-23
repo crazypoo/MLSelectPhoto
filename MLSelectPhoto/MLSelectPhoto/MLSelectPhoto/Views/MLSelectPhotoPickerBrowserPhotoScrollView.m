@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  ZLPhotoPickerBrowserPhotoScrollView.m
 //  ZLAssetsPickerDemo
@@ -6,33 +8,33 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
-#import "ZLPhotoPickerBrowserPhotoScrollView.h"
+#import "MLSelectPhotoPickerBrowserPhotoScrollView.h"
 #import "MLSelectPhotoPickerDatas.h"
 #import "MLSelectPhotoCommon.h"
 
 // Private methods and properties
-@interface ZLPhotoPickerBrowserPhotoScrollView ()<UIActionSheetDelegate> {
-    ZLPhotoPickerBrowserPhotoView *_tapView; // for background taps
-    ZLPhotoPickerBrowserPhotoImageView *_photoImageView;
+@interface MLSelectPhotoPickerBrowserPhotoScrollView ()<UIActionSheetDelegate> {
+    MLSelectPhotoPickerBrowserPhotoView *_tapView; // for background taps
+    MLSelectPhotoPickerBrowserPhotoImageView *_photoImageView;
 }
 
 @end
 
-@implementation ZLPhotoPickerBrowserPhotoScrollView
+@implementation MLSelectPhotoPickerBrowserPhotoScrollView
 
 - (id)init{
     if ((self = [super init])) {
         
         // Setup
         // Tap view for background
-        _tapView = [[ZLPhotoPickerBrowserPhotoView alloc] initWithFrame:self.bounds];
+        _tapView = [[MLSelectPhotoPickerBrowserPhotoView alloc] initWithFrame:self.bounds];
         _tapView.tapDelegate = self;
         _tapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _tapView.backgroundColor = [UIColor blackColor];
         [self addSubview:_tapView];
         
         // Image view
-        _photoImageView = [[ZLPhotoPickerBrowserPhotoImageView alloc] initWithFrame:CGRectZero];
+        _photoImageView = [[MLSelectPhotoPickerBrowserPhotoImageView alloc] initWithFrame:CGRectZero];
         _photoImageView.tapDelegate = self;
         _photoImageView.contentMode = UIViewContentModeCenter;
         _photoImageView.backgroundColor = [UIColor blackColor];

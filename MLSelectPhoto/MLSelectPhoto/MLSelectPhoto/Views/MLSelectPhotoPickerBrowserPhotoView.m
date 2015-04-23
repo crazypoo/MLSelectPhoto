@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  ZLPhotoPickerBrowserPhotoView.m
 //  ZLAssetsPickerDemo
@@ -6,9 +8,9 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
-#import "ZLPhotoPickerBrowserPhotoView.h"
+#import "MLSelectPhotoPickerBrowserPhotoView.h"
 
-@implementation ZLPhotoPickerBrowserPhotoView
+@implementation MLSelectPhotoPickerBrowserPhotoView
 
 - (id)init {
 	if ((self = [super init])) {

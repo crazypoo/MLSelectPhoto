@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  ZLPhotoPickerBrowserPhotoScrollView.h
 //  ZLAssetsPickerDemo
@@ -8,21 +10,21 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ZLPhotoPickerBrowserPhotoImageView.h"
-#import "ZLPhotoPickerBrowserPhotoView.h"
-#import "ZLPhotoPickerBrowserPhoto.h"
+#import "MLSelectPhotoPickerBrowserPhotoImageView.h"
+#import "MLSelectPhotoPickerBrowserPhotoView.h"
+#import "MLSelectPhotoPickerBrowserPhoto.h"
 #import "MLSelectPhoto.h"
 
 typedef void(^callBackBlock)(id obj);
-@class ZLPhotoPickerBrowserPhotoScrollView;
+@class MLSelectPhotoPickerBrowserPhotoScrollView;
 
 @protocol ZLPhotoPickerPhotoScrollViewDelegate <NSObject>
 @optional
 // 单击调用
-- (void) pickerPhotoScrollViewDidSingleClick:(ZLPhotoPickerBrowserPhotoScrollView *)photoScrollView;
+- (void) pickerPhotoScrollViewDidSingleClick:(MLSelectPhotoPickerBrowserPhotoScrollView *)photoScrollView;
 @end
 
-@interface ZLPhotoPickerBrowserPhotoScrollView : UIScrollView <UIScrollViewDelegate, ZLPhotoPickerBrowserPhotoImageViewDelegate,ZLPhotoPickerBrowserPhotoViewDelegate>
+@interface MLSelectPhotoPickerBrowserPhotoScrollView : UIScrollView <UIScrollViewDelegate, ZLPhotoPickerBrowserPhotoImageViewDelegate,ZLPhotoPickerBrowserPhotoViewDelegate>
 
 @property (nonatomic,strong) MLSelectPhotoAssets *photo;
 @property (nonatomic, weak) id <ZLPhotoPickerPhotoScrollViewDelegate> photoScrollViewDelegate;

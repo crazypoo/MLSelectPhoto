@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  ZLPhotoPickerBrowserPhotoImageView.h
 //  ZLAssetsPickerDemo
@@ -11,7 +13,7 @@
 
 @protocol ZLPhotoPickerBrowserPhotoImageViewDelegate;
 
-@interface ZLPhotoPickerBrowserPhotoImageView : UIImageView {}
+@interface MLSelectPhotoPickerBrowserPhotoImageView : UIImageView {}
 
 @property (nonatomic, weak) id <ZLPhotoPickerBrowserPhotoImageViewDelegate> tapDelegate;
 @property (assign,nonatomic) CGFloat progress;

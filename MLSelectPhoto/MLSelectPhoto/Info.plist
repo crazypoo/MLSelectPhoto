@@ -38,5 +38,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>ORGANIZATIONNAME</key>
+	<string>https://github.com/MakeZL/MLSelectPhoto</string>
 </dict>
 </plist>

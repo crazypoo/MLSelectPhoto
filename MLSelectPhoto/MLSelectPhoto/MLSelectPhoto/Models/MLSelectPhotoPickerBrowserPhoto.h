@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  PickerPhoto.h
 //  ZLAssetsPickerDemo
@@ -10,7 +12,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "MLSelectPhotoAssets.h"
 
-@interface ZLPhotoPickerBrowserPhoto : NSObject
+@interface MLSelectPhotoPickerBrowserPhoto : NSObject
 
 /**
  *  自动适配是不是以下几种数据

@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  PickerPhoto.m
 //  ZLAssetsPickerDemo
@@ -6,9 +8,9 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
-#import "ZLPhotoPickerBrowserPhoto.h"
+#import "MLSelectPhotoPickerBrowserPhoto.h"
 
-@implementation ZLPhotoPickerBrowserPhoto
+@implementation MLSelectPhotoPickerBrowserPhoto
 
 - (void)setPhotoObj:(id)photoObj{
     _photoObj = photoObj;
@@ -47,7 +49,7 @@
 
 #pragma mark - 传入一个图片对象，可以是URL/UIImage/NSString，返回一个实例
 + (instancetype)photoAnyImageObjWith:(id)imageObj{
-    ZLPhotoPickerBrowserPhoto *photo = [[self alloc] init];
+    MLSelectPhotoPickerBrowserPhoto *photo = [[self alloc] init];
     [photo setPhotoObj:imageObj];
     return photo;
 }

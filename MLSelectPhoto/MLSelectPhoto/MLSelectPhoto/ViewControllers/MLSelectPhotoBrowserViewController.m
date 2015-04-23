@@ -1,3 +1,5 @@
+//  github: https://github.com/MakeZL/MLSelectPhoto
+//  author: @email <120886865@qq.com>
 //
 //  MLSelectPhotoBrowserViewController.m
 //  MLSelectPhoto
@@ -9,7 +11,7 @@
 #import "MLSelectPhotoBrowserViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "UIView+MLExtension.h"
-#import "ZLPhotoPickerBrowserPhotoScrollView.h"
+#import "MLSelectPhotoPickerBrowserPhotoScrollView.h"
 #import "MLSelectPhotoCommon.h"
 
 
@@ -21,10 +23,14 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 @interface MLSelectPhotoBrowserViewController () <UIScrollViewDelegate,ZLPhotoPickerPhotoScrollViewDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate>
 
 // 控件
-@property (weak,nonatomic) UILabel          *pageLabel;
-@property (weak,nonatomic) UIButton         *deleleBtn;
+@property (strong,nonatomic) UIButton         *deleleBtn;
 @property (weak,nonatomic) UIButton         *backBtn;
 @property (weak,nonatomic) UICollectionView *collectionView;
+
+// 标记View
+@property (strong,nonatomic) UIToolbar *toolBar;
+@property (weak,nonatomic) UILabel *makeView;
+@property (strong,nonatomic) UIButton *doneBtn;
 
 @end
 
@@ -56,72 +62,65 @@ static NSString *_cellIdentifier = @"collectionViewCell";
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_collectionView]-x-|" options:0 metrics:@{@"x":@(-20)} views:@{@"_collectionView":_collectionView}]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_collectionView]-0-|" options:0 metrics:nil views:@{@"_collectionView":_collectionView}]];
         
-        self.pageLabel.hidden = NO;
-        self.deleleBtn.hidden = !self.isEditing;
+        // 初始化底部ToorBar
+        [self setupToorBar];
     }
     return _collectionView;
+}
+
+#pragma mark Get View
+#pragma mark makeView 红点标记View
+- (UILabel *)makeView{
+    if (!_makeView) {
+        UILabel *makeView = [[UILabel alloc] init];
+        makeView.textColor = [UIColor whiteColor];
+        makeView.textAlignment = NSTextAlignmentCenter;
+        makeView.font = [UIFont systemFontOfSize:13];
+        makeView.frame = CGRectMake(-5, -5, 20, 20);
+        makeView.hidden = YES;
+        makeView.layer.cornerRadius = makeView.frame.size.height / 2.0;
+        makeView.clipsToBounds = YES;
+        makeView.backgroundColor = [UIColor redColor];
+        [self.view addSubview:makeView];
+        self.makeView = makeView;
+        
+    }
+    return _makeView;
+}
+
+- (UIButton *)doneBtn{
+    if (!_doneBtn) {
+        UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        rightBtn.enabled = YES;
+        rightBtn.titleLabel.font = [UIFont systemFontOfSize:17];
+        rightBtn.frame = CGRectMake(0, 0, 45, 45);
+        [rightBtn setTitle:@"完成" forState:UIControlStateNormal];
+        [rightBtn addTarget:self action:@selector(done) forControlEvents:UIControlEventTouchUpInside];
+        [rightBtn addSubview:self.makeView];
+        self.doneBtn = rightBtn;
+    }
+    return _doneBtn;
 }
 
 #pragma mark deleleBtn
 - (UIButton *)deleleBtn{
     if (!_deleleBtn) {
         UIButton *deleleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        deleleBtn.translatesAutoresizingMaskIntoConstraints = NO;
         deleleBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-        //        [deleleBtn setTitle:@"删除" forState:UIControlStateNormal];
-        [deleleBtn setImage:[UIImage imageNamed:@"nav_delete_btn"] forState:UIControlStateNormal];
-        
-        // 设置阴影
-        deleleBtn.layer.shadowColor = [UIColor blackColor].CGColor;
-        deleleBtn.layer.shadowOffset = CGSizeMake(0, 0);
-        deleleBtn.layer.shadowRadius = 3;
-        deleleBtn.layer.shadowOpacity = 1.0;
-        
-//        [deleleBtn addTarget:self action:@selector(delete) forControlEvents:UIControlEventTouchUpInside];
-        deleleBtn.hidden = YES;
-        [self.view addSubview:deleleBtn];
+        [deleleBtn setImage:[UIImage imageNamed:MLSelectPhotoSrcName(@"AssetsPickerChecked")] forState:UIControlStateNormal];
+        deleleBtn.frame = CGRectMake(0, 0, 30, 30);
+        [deleleBtn addTarget:self action:@selector(deleteAsset) forControlEvents:UIControlEventTouchUpInside];
         self.deleleBtn = deleleBtn;
-        
-        NSString *widthVfl = @"H:[deleleBtn(deleteBtnWH)]-margin-|";
-        NSString *heightVfl = @"V:|-margin-[deleleBtn(deleteBtnWH)]";
-        NSDictionary *metrics = @{@"deleteBtnWH":@(50),@"margin":@(10)};
-        NSDictionary *views = NSDictionaryOfVariableBindings(deleleBtn);
-        
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:widthVfl options:0 metrics:metrics views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:heightVfl options:0 metrics:metrics views:views]];
-        
     }
     return _deleleBtn;
-}
-
-#pragma mark pageLabel
-- (UILabel *)pageLabel{
-    if (!_pageLabel) {
-        UILabel *pageLabel = [[UILabel alloc] init];
-        pageLabel.font = [UIFont systemFontOfSize:18];
-        pageLabel.textAlignment = NSTextAlignmentCenter;
-        pageLabel.userInteractionEnabled = NO;
-        pageLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        pageLabel.backgroundColor = [UIColor clearColor];
-        pageLabel.textColor = [UIColor whiteColor];
-        [self.view addSubview:pageLabel];
-        self.pageLabel = pageLabel;
-        
-        NSString *widthVfl = @"H:|-0-[pageLabel]-0-|";
-        NSString *heightVfl = @"V:[pageLabel(ZLPickerPageCtrlH)]-20-|";
-        NSDictionary *views = NSDictionaryOfVariableBindings(pageLabel);
-        NSDictionary *metrics = @{@"ZLPickerPageCtrlH":@(ZLPickerPageCtrlH)};
-        
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:widthVfl options:0 metrics:metrics views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:heightVfl options:0 metrics:metrics views:views]];
-        
-    }
-    return _pageLabel;
 }
 
 - (void)setPhotos:(NSArray *)photos{
     _photos = photos;
     
+    self.makeView.text = [NSString stringWithFormat:@"%ld",photos.count];
+    self.makeView.hidden = !photos.count;
     [self reloadData];
 }
 
@@ -132,7 +131,36 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.deleleBtn];
     self.view.backgroundColor = [UIColor blackColor];
+    
+}
+
+#pragma mark -初始化底部ToorBar
+- (void) setupToorBar{
+    UIToolbar *toorBar = [[UIToolbar alloc] init];
+    toorBar.barTintColor = UIColorFromRGB(0x333333);
+    toorBar.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:toorBar];
+    self.toolBar = toorBar;
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(toorBar);
+    NSString *widthVfl =  @"H:|-0-[toorBar]-0-|";
+    NSString *heightVfl = @"V:[toorBar(44)]-0-|";
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:widthVfl options:0 metrics:0 views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:heightVfl options:0 metrics:0 views:views]];
+    
+    // 左视图 中间距 右视图
+    UIBarButtonItem *fiexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.doneBtn];
+    
+    toorBar.items = @[fiexItem,rightItem];
+    
+}
+
+- (void)deleteAsset{
+    
 }
 
 #pragma mark - reloadData
@@ -180,7 +208,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
         scrollBoxView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [cell.contentView addSubview:scrollBoxView];
         
-        ZLPhotoPickerBrowserPhotoScrollView *scrollView =  [[ZLPhotoPickerBrowserPhotoScrollView alloc] init];
+        MLSelectPhotoPickerBrowserPhotoScrollView *scrollView =  [[MLSelectPhotoPickerBrowserPhotoScrollView alloc] init];
         scrollView.sheet = self.sheet;
         scrollView.backgroundColor = [UIColor clearColor];
         // 为了监听单击photoView事件
@@ -199,7 +227,11 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     }
     return cell;
 }
-
+// 单击调用
+- (void) pickerPhotoScrollViewDidSingleClick:(MLSelectPhotoPickerBrowserPhotoScrollView *)photoScrollView{
+    self.navigationController.navigationBar.hidden = !self.navigationController.navigationBar.isHidden;
+    self.toolBar.hidden = !self.toolBar.isHidden;
+}
 #pragma mark - <UIScrollViewDelegate>
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGRect tempF = self.collectionView.frame;
@@ -216,14 +248,21 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     self.collectionView.frame = tempF;
 }
 
--(void)setPageLabelPage:(NSInteger)page{
-    self.pageLabel.text = [NSString stringWithFormat:@"%ld / %ld",page + 1, self.photos.count];
+- (void)done{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:PICKER_TAKE_DONE object:nil userInfo:@{@"selectAssets":self.photos}];
+    });
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)setPageLabelPage:(NSInteger)page{
+    self.title = [NSString stringWithFormat:@"%ld / %ld",page + 1, self.photos.count];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     NSInteger currentPage = (NSInteger)scrollView.contentOffset.x / (scrollView.ml_width - ZLPickerColletionViewPadding);
     if (currentPage == self.photos.count - 1 && currentPage != self.currentPage && [[[UIDevice currentDevice] systemVersion] doubleValue] >= 8.0) {
-        self.collectionView.contentOffset = CGPointMake(self.collectionView.contentOffset.x + ZLPickerColletionViewPadding, self.collectionView.contentOffset.y);
+        self.collectionView.contentOffset = CGPointMake(self.collectionView.contentOffset.x, self.collectionView.contentOffset.y);
     }
     self.currentPage = currentPage;
     [self setPageLabelPage:currentPage];
