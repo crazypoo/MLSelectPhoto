@@ -8,12 +8,9 @@
 
 #import "MLSelectPhotoBrowserViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import <objc/runtime.h>
-//#import "ZLPhotoPickerDatas.h"
 #import "UIView+MLExtension.h"
 #import "ZLPhotoPickerBrowserPhotoScrollView.h"
 #import "MLSelectPhotoCommon.h"
-//#import "ZLAnimationScrollView.h"
 
 
 // 分页控制器的高度
@@ -29,11 +26,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 @property (weak,nonatomic) UIButton         *backBtn;
 @property (weak,nonatomic) UICollectionView *collectionView;
 
-// 当前提供的分页数
-@property (nonatomic , assign) NSInteger currentPage;
-
 @end
-
 
 @implementation MLSelectPhotoBrowserViewController
 
@@ -84,7 +77,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
         deleleBtn.layer.shadowRadius = 3;
         deleleBtn.layer.shadowOpacity = 1.0;
         
-        [deleleBtn addTarget:self action:@selector(delete) forControlEvents:UIControlEventTouchUpInside];
+//        [deleleBtn addTarget:self action:@selector(delete) forControlEvents:UIControlEventTouchUpInside];
         deleleBtn.hidden = YES;
         [self.view addSubview:deleleBtn];
         self.deleleBtn = deleleBtn;
@@ -129,18 +122,10 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 - (void)setPhotos:(NSArray *)photos{
     _photos = photos;
     
-    [self.collectionView reloadData];
+    [self reloadData];
 }
 
 #pragma mark - Life cycle
-//- (void)viewDidAppear:(BOOL)animated{
-//    [super viewDidAppear:animated];
-//    NSAssert(self.dataSource, @"你没成为数据源代理");
-//    [self collectionView];
-//    // 初始化动画
-////    [self startLogddingAnimation];
-//}
-
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -150,40 +135,13 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     self.view.backgroundColor = [UIColor blackColor];
 }
 
-#pragma mark - Get
-#pragma mark getPhotos
-//- (NSArray *) getPhotos{
-//    NSMutableArray *photos = [NSMutableArray array];
-//    NSInteger section = self.currentIndexPath.section;
-//    NSInteger rows = [self.dataSource photoBrowser:self numberOfItemsInSection:section];
-//    for (NSInteger i = 0; i < rows; i++) {
-//        [photos addObject:[self.dataSource photoBrowser:self photoAtIndexPath:[NSIndexPath indexPathForItem:i inSection:section]]];
-//    }
-//    return photos;
-//}
-
-#pragma mark get Controller.view
-- (UIView *)getParsentView:(UIView *)view{
-    if ([[view nextResponder] isKindOfClass:[UIViewController class]] || view == nil) {
-        return view;
-    }
-    return [self getParsentView:view.superview];
-}
-
-- (id)getParsentViewController:(UIView *)view{
-    if ([[view nextResponder] isKindOfClass:[UIViewController class]] || view == nil) {
-        return [view nextResponder];
-    }
-    return [self getParsentViewController:view.superview];
-}
-
 #pragma mark - reloadData
 - (void) reloadData{
-    self.collectionView.dataSource = self;
+    
     [self.collectionView reloadData];
     
     // 添加自定义View
-//    [self setPageLabelPage:self.currentPage];
+    [self setPageLabelPage:self.currentPage];
     if (self.currentPage >= 0) {
         CGFloat attachVal = 0;
         if (self.currentPage == self.photos.count - 1 && self.currentPage > 0) {
@@ -195,7 +153,6 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     }
     
 }
-
 
 #pragma mark - <UICollectionViewDataSource>
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -233,24 +190,14 @@ static NSString *_cellIdentifier = @"collectionViewCell";
         
         [scrollBoxView addSubview:scrollView];
         scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        if (self.currentPage == self.photos.count - 1 && scrollView.ml_x >= 0 && !collectionView.isDragging) {
+        
+        if (self.photos.count == 1) {
+            scrollView.ml_x = 0;
+        }else if (self.currentPage == self.photos.count - 1 && scrollView.ml_x >= 0 && !collectionView.isDragging) {
             scrollView.ml_x = -ZLPickerColletionViewPadding;
         }
-        
     }
-    
     return cell;
-}
-
-#pragma mark - 获取CollectionView
-- (UIView *) getScrollViewBaseViewWithCell:(UIView *)view{
-    for (int i = 0; i < view.subviews.count; i++) {
-        UICollectionViewCell *cell = view.subviews[i];
-        if ([cell isKindOfClass:[UICollectionView class]] || [cell isKindOfClass:[UITableView class]]  || [cell isKindOfClass:[UIScrollView class]] || view == nil) {
-            return cell;
-        }
-    }
-    return [self getScrollViewBaseViewWithCell:view.superview];
 }
 
 #pragma mark - <UIScrollViewDelegate>
@@ -274,135 +221,12 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    
     NSInteger currentPage = (NSInteger)scrollView.contentOffset.x / (scrollView.ml_width - ZLPickerColletionViewPadding);
-    
     if (currentPage == self.photos.count - 1 && currentPage != self.currentPage && [[[UIDevice currentDevice] systemVersion] doubleValue] >= 8.0) {
         self.collectionView.contentOffset = CGPointMake(self.collectionView.contentOffset.x + ZLPickerColletionViewPadding, self.collectionView.contentOffset.y);
     }
-    
     self.currentPage = currentPage;
     [self setPageLabelPage:currentPage];
-    
-    
-}
-
-//#pragma mark - 删除照片
-//- (void) delete{
-//    
-//    // 准备删除
-//    if ([self.delegate respondsToSelector:@selector(photoBrowser:willRemovePhotoAtIndexPath:)]) {
-//        if(![self.delegate photoBrowser:self willRemovePhotoAtIndexPath:[NSIndexPath indexPathForItem:self.currentPage inSection:self.currentIndexPath.section]]){
-//            return ;
-//        }
-//    }
-//    
-//    UIAlertView *removeAlert = [[UIAlertView alloc]
-//                                initWithTitle:@"确定要删除此图片？"
-//                                message:nil
-//                                delegate:self
-//                                cancelButtonTitle:@"取消"
-//                                otherButtonTitles:@"确定", nil];
-//    [removeAlert show];
-//}
-//
-//#pragma mark - <UIAlertViewDelegate>
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    if (buttonIndex == 1) {
-//        NSInteger page = self.currentPage;
-//        if ([self.delegate respondsToSelector:@selector(photoBrowser:removePhotoAtIndexPath:)]) {
-//            [self.delegate photoBrowser:self removePhotoAtIndexPath:[NSIndexPath indexPathForItem:page inSection:self.currentIndexPath.section]];
-//        }
-//        
-//        [self.photos removeObjectAtIndex:self.currentPage];
-//        
-//        if (self.currentPage >= self.photos.count) {
-//            self.currentPage--;
-//        }
-//        
-//        UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:page inSection:self.currentIndexPath.section]];
-//        if (cell) {
-//            if([[[cell.contentView subviews] lastObject] isKindOfClass:[UIView class]]){
-//                
-//                [UIView animateWithDuration:.35 animations:^{
-//                    [[[cell.contentView subviews] lastObject] setAlpha:0.0];
-//                } completion:^(BOOL finished) {
-//                    [self reloadData];
-//                }];
-//            }
-//        }
-//        
-//        if (self.photos.count < 1)
-//        {
-//            [[NSNotificationCenter defaultCenter] removeObserver:self];
-//            [self dismissViewControllerAnimated:YES completion:nil];
-//            [[UIApplication sharedApplication] setStatusBarHidden:NO];
-//        }
-//    }
-//}
-//
-//#pragma mark - <PickerPhotoScrollViewDelegate>
-//- (void)pickerPhotoScrollViewDidSingleClick:(ZLPhotoPickerBrowserPhotoScrollView *)photoScrollView{
-//    if (self.disMissBlock) {
-//        
-//        if (self.photos.count == 1) {
-//            self.currentPage = 0;
-//        }
-//        self.disMissBlock(self.currentPage);
-//    }else{
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    }
-//    
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
-//}
-
-#pragma mark - showHeadPortrait 放大缩小一张图片的情况下（查看头像）
-- (void)showHeadPortrait:(UIImageView *)toImageView{
-    [self showHeadPortrait:toImageView originUrl:nil];
-}
-
-- (void)showHeadPortrait:(UIImageView *)toImageView originUrl:(NSString *)originUrl{
-    UIView *mainView = [[UIView alloc] init];
-    mainView.backgroundColor = [UIColor blackColor];
-    mainView.frame = [UIScreen mainScreen].bounds;
-    [[UIApplication sharedApplication].keyWindow addSubview:mainView];
-    
-    CGRect tempF = [toImageView.superview convertRect:toImageView.frame toView:[self getParsentView:toImageView]];
-    UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.userInteractionEnabled = YES;
-    imageView.frame = tempF;
-    imageView.image = toImageView.image;
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [mainView addSubview:imageView];
-    mainView.clipsToBounds = YES;
-    
-    [UIView animateWithDuration:.25 animations:^{
-        imageView.frame = [UIScreen mainScreen].bounds;
-    } completion:^(BOOL finished) {
-        imageView.hidden = YES;
-        
-        ZLPhotoPickerBrowserPhoto *photo = [[ZLPhotoPickerBrowserPhoto alloc] init];
-        photo.photoURL = [NSURL URLWithString:originUrl];
-        photo.photoImage = toImageView.image;
-        photo.thumbImage = toImageView.image;
-        
-        ZLPhotoPickerBrowserPhotoScrollView *scrollView = [[ZLPhotoPickerBrowserPhotoScrollView alloc] init];
-        
-        __weak typeof(ZLPhotoPickerBrowserPhotoScrollView *)weakScrollView = scrollView;
-        scrollView.callback = ^(id obj){
-            [weakScrollView removeFromSuperview];
-            mainView.backgroundColor = [UIColor clearColor];
-            imageView.hidden = NO;
-            [UIView animateWithDuration:.25 animations:^{
-                imageView.frame = tempF;
-            } completion:^(BOOL finished) {
-                [mainView removeFromSuperview];
-            }];
-        };
-        scrollView.frame = [UIScreen mainScreen].bounds;
-        scrollView.photo = photo;
-        [mainView addSubview:scrollView];
-    }];
 }
 
 @end

@@ -11,4 +11,6 @@
 @interface MLSelectPhotoBrowserViewController : UIViewController
 @property (strong,nonatomic) NSArray *photos;
 @property (strong,nonatomic) UIActionSheet *sheet;
+// 当前提供的分页数
+@property (nonatomic , assign) NSInteger currentPage;
 @end
