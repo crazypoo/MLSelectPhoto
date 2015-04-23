@@ -192,6 +192,8 @@ static NSString *_cellIdentifier = @"collectionViewCell";
         [self.deleteAssets removeObjectForKey:currentPage];
         [self.deleleBtn setImage:[UIImage imageNamed:MLSelectPhotoSrcName(@"AssetsPickerChecked") ] forState:UIControlStateNormal];
     }
+    
+    self.makeView.text = [NSString stringWithFormat:@"%ld",self.doneAssets.count];
 }
 
 #pragma mark - reloadData
