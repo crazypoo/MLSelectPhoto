@@ -20,11 +20,8 @@
 
 /**
  *
- 使用方法：
- 有什么不懂的也可以联系QQ：120886865 (*^__^*) 嘻嘻……
- ZLPhotoPickerViewController:
- Note : (图片相册多选控制器)
- 创建控制器
+ 
+ // Use
  ZLPhotoPickerViewController *pickerVc = [[ZLPhotoPickerViewController alloc] init];
  // 默认显示相册里面的内容SavePhotos
  pickerVc.status = PickerViewShowStatusCameraRoll;
@@ -39,5 +36,6 @@
  第二种回调方法pickerVc.callBack = ^(NSArray *assets){
  // TODO 回调结果，可以不用实现代理
  };
+ 
  */
 #endif

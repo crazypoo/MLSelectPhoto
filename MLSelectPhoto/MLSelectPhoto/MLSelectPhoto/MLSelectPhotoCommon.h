@@ -18,6 +18,10 @@ static NSInteger const KPhotoShowMaxCount = 9;
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
+// Navigation Color
+#define DefaultNavbarTintColor UIColorFromRGB(0x2f3535)
+#define DefaultNavTintColor UIColorFromRGB(0xd5d5d5)
+#define DefaultNavTitleColor UIColorFromRGB(0xd5d5d5)
 
 #define iOS7gt ([[UIDevice currentDevice].systemVersion doubleValue] >= 7.0)
 

@@ -9,7 +9,7 @@
 //
 
 #import "AppDelegate.h"
-#import "MLSelectPhotoCommon.h"
+#import "MLSelectPhotoNavigationViewController.h"
 #import "ViewController.h"
 
 @interface AppDelegate ()
@@ -20,12 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc ]initWithFrame:[UIScreen mainScreen].bounds];
-    UINavigationController *navVc = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
-    
-    [navVc.navigationBar setValue:UIColorFromRGB(0x2f3535) forKeyPath:@"barTintColor"];
-    [navVc.navigationBar setTintColor:UIColorFromRGB(0xd5d5d5)];
-    [navVc.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0xd5d5d5)}];
-    
+    MLSelectPhotoNavigationViewController *navVc = [[MLSelectPhotoNavigationViewController alloc] initWithRootViewController:[[ViewController alloc] init]];
     self.window.rootViewController = navVc;
     [self.window makeKeyAndVisible];
     return YES;

@@ -29,9 +29,9 @@
         [self.navigationBar setTitleTextAttributes:rootVc.navigationBar.titleTextAttributes];
         
     }else{
-        [self.navigationBar setValue:UIColorFromRGB(0x2f3535) forKeyPath:@"barTintColor"];
-        [self.navigationBar setTintColor:UIColorFromRGB(0xd5d5d5)];
-        [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:UIColorFromRGB(0xd5d5d5)}];
+        [self.navigationBar setValue:DefaultNavbarTintColor forKeyPath:@"barTintColor"];
+        [self.navigationBar setTintColor:DefaultNavTintColor];
+        [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:DefaultNavTitleColor}];
     }
 }
 @end

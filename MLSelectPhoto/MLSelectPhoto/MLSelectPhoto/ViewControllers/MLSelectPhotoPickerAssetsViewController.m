@@ -15,6 +15,7 @@
 #import "MLSelectPhotoPickerGroup.h"
 #import "MLSelectPhotoPickerCollectionViewCell.h"
 #import "MLSelectPhotoPickerFooterCollectionReusableView.h"
+#import "MLSelectPhotoBrowserViewController.h"
 
 static CGFloat CELL_ROW = 4;
 static CGFloat CELL_MARGIN = 2;
@@ -261,7 +262,10 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 }
 
 - (void)preview{
-    
+    MLSelectPhotoBrowserViewController *browserVc = [[MLSelectPhotoBrowserViewController alloc] init];
+    browserVc.photos = self.selectAssets;
+    browserVc.title = @"Browser Photos.";
+    [self.navigationController pushViewController:browserVc animated:YES];
 }
 
 - (void) pickerCollectionViewDidSelected:(MLSelectPhotoPickerCollectionView *) pickerCollectionView deleteAsset:(MLSelectPhotoAssets *)deleteAssets{
