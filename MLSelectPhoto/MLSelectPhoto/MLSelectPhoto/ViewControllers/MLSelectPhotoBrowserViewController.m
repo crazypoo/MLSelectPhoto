@@ -13,7 +13,7 @@
 #import "UIView+MLExtension.h"
 #import "MLSelectPhotoPickerBrowserPhotoScrollView.h"
 #import "MLSelectPhotoCommon.h"
-
+#import "UIImage+MLTint.h"
 
 // 分页控制器的高度
 static NSInteger const ZLPickerPageCtrlH = 25;
@@ -32,12 +32,29 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 @property (weak,nonatomic) UILabel *makeView;
 @property (strong,nonatomic) UIButton *doneBtn;
 
+@property (strong,nonatomic) NSMutableDictionary *deleteAssets;
+@property (strong,nonatomic) NSMutableArray *doneAssets;
+
 @end
 
 @implementation MLSelectPhotoBrowserViewController
 
 #pragma mark - getter
 #pragma mark collectionView
+-(NSMutableDictionary *)deleteAssets{
+    if (!_deleteAssets) {
+        _deleteAssets = [NSMutableDictionary dictionary];
+    }
+    return _deleteAssets;
+}
+
+- (NSMutableArray *)doneAssets{
+    if (!_doneAssets) {
+        _doneAssets = [NSMutableArray array];
+    }
+    return _doneAssets;
+}
+
 - (UICollectionView *)collectionView{
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -118,6 +135,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 
 - (void)setPhotos:(NSArray *)photos{
     _photos = photos;
+    _doneAssets = [NSMutableArray arrayWithArray:photos];
     
     self.makeView.text = [NSString stringWithFormat:@"%ld",photos.count];
     self.makeView.hidden = !photos.count;
@@ -156,11 +174,24 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.doneBtn];
     
     toorBar.items = @[fiexItem,rightItem];
-    
 }
 
 - (void)deleteAsset{
-    
+    NSString *currentPage = [NSString stringWithFormat:@"%ld",self.currentPage];
+    if ([_deleteAssets valueForKeyPath:currentPage] == nil) {
+        [self.deleteAssets setObject:@YES forKey:currentPage];
+        [self.deleleBtn setImage:[[UIImage imageNamed:MLSelectPhotoSrcName(@"AssetsPickerChecked") ] imageWithTintColor:[UIColor grayColor]] forState:UIControlStateNormal];
+        
+        if ([self.doneAssets containsObject:[self.photos objectAtIndex:self.currentPage]]) {
+            [self.doneAssets removeObject:[self.photos objectAtIndex:self.currentPage]];
+        }
+    }else{
+        if (![self.doneAssets containsObject:[self.photos objectAtIndex:self.currentPage]]) {
+            [self.doneAssets addObject:[self.photos objectAtIndex:self.currentPage]];
+        }
+        [self.deleteAssets removeObjectForKey:currentPage];
+        [self.deleleBtn setImage:[UIImage imageNamed:MLSelectPhotoSrcName(@"AssetsPickerChecked") ] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - reloadData
@@ -245,12 +276,19 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     }else{
         tempF.origin.x = -ZLPickerColletionViewPadding;
     }
+    
+    if([[self.deleteAssets allValues] count] == 0 || [self.deleteAssets valueForKeyPath:[NSString stringWithFormat:@"%ld",(currentPage)]] == nil){
+        [self.deleleBtn setImage:[UIImage imageNamed:MLSelectPhotoSrcName(@"AssetsPickerChecked") ] forState:UIControlStateNormal];
+    }else{
+        [self.deleleBtn setImage:[[UIImage imageNamed:MLSelectPhotoSrcName(@"AssetsPickerChecked") ] imageWithTintColor:[UIColor grayColor]] forState:UIControlStateNormal];
+    }
+    
     self.collectionView.frame = tempF;
 }
 
 - (void)done{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:PICKER_TAKE_DONE object:nil userInfo:@{@"selectAssets":self.photos}];
+        [[NSNotificationCenter defaultCenter] postNotificationName:PICKER_TAKE_DONE object:nil userInfo:@{@"selectAssets":self.doneAssets}];
     });
     [self dismissViewControllerAnimated:YES completion:nil];
 }
