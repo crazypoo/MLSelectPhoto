@@ -16,24 +16,26 @@
 #import "UIImage+MLTint.h"
 
 // 分页控制器的高度
-static NSInteger const ZLPickerPageCtrlH = 25;
 static NSInteger ZLPickerColletionViewPadding = 20;
 static NSString *_cellIdentifier = @"collectionViewCell";
 
 @interface MLSelectPhotoBrowserViewController () <UIScrollViewDelegate,ZLPhotoPickerPhotoScrollViewDelegate,UICollectionViewDelegateFlowLayout,UICollectionViewDataSource,UICollectionViewDelegate>
 
 // 控件
-@property (strong,nonatomic) UIButton         *deleleBtn;
-@property (weak,nonatomic) UIButton         *backBtn;
-@property (weak,nonatomic) UICollectionView *collectionView;
+@property (strong,nonatomic)    UIButton         *deleleBtn;
+@property (weak,nonatomic)      UIButton         *backBtn;
+@property (weak,nonatomic)      UICollectionView *collectionView;
 
 // 标记View
-@property (strong,nonatomic) UIToolbar *toolBar;
-@property (weak,nonatomic) UILabel *makeView;
-@property (strong,nonatomic) UIButton *doneBtn;
+@property (strong,nonatomic)    UIToolbar *toolBar;
+@property (weak,nonatomic)      UILabel *makeView;
+@property (strong,nonatomic)    UIButton *doneBtn;
 
-@property (strong,nonatomic) NSMutableDictionary *deleteAssets;
-@property (strong,nonatomic) NSMutableArray *doneAssets;
+@property (strong,nonatomic)    NSMutableDictionary *deleteAssets;
+@property (strong,nonatomic)    NSMutableArray *doneAssets;
+
+// 是否是编辑模式
+@property (assign,nonatomic) BOOL isEditing;
 
 @end
 
@@ -79,8 +81,11 @@ static NSString *_cellIdentifier = @"collectionViewCell";
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_collectionView]-x-|" options:0 metrics:@{@"x":@(-20)} views:@{@"_collectionView":_collectionView}]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_collectionView]-0-|" options:0 metrics:nil views:@{@"_collectionView":_collectionView}]];
         
-        // 初始化底部ToorBar
-        [self setupToorBar];
+        if (self.isEditing) {
+            self.makeView.hidden = !(self.photos.count && self.isEditing);
+            // 初始化底部ToorBar
+            [self setupToorBar];
+        }
     }
     return _collectionView;
 }
@@ -137,9 +142,8 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     _photos = photos;
     _doneAssets = [NSMutableArray arrayWithArray:photos];
     
-    self.makeView.text = [NSString stringWithFormat:@"%ld",photos.count];
-    self.makeView.hidden = !photos.count;
     [self reloadData];
+    self.makeView.text = [NSString stringWithFormat:@"%ld",self.photos.count];
 }
 
 #pragma mark - Life cycle
@@ -150,7 +154,6 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.deleleBtn];
     self.view.backgroundColor = [UIColor blackColor];
     
 }
@@ -201,8 +204,6 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     
     [self.collectionView reloadData];
     
-    // 添加自定义View
-    [self setPageLabelPage:self.currentPage];
     if (self.currentPage >= 0) {
         CGFloat attachVal = 0;
         if (self.currentPage == self.photos.count - 1 && self.currentPage > 0) {
@@ -213,6 +214,16 @@ static NSString *_cellIdentifier = @"collectionViewCell";
         self.collectionView.contentOffset = CGPointMake(self.currentPage * self.collectionView.ml_width, 0);
     }
     
+    // 添加自定义View
+    [self setPageLabelPage:self.currentPage];
+}
+
+- (void)setIsEditing:(BOOL)isEditing{
+    _isEditing = isEditing;
+    
+    if (isEditing) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.deleleBtn];
+    }
 }
 
 #pragma mark - <UICollectionViewDataSource>
@@ -263,7 +274,9 @@ static NSString *_cellIdentifier = @"collectionViewCell";
 // 单击调用
 - (void) pickerPhotoScrollViewDidSingleClick:(MLSelectPhotoPickerBrowserPhotoScrollView *)photoScrollView{
     self.navigationController.navigationBar.hidden = !self.navigationController.navigationBar.isHidden;
-    self.toolBar.hidden = !self.toolBar.isHidden;
+    if (self.isEditing) {
+        self.toolBar.hidden = !self.toolBar.isHidden;
+    }
 }
 #pragma mark - <UIScrollViewDelegate>
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -275,7 +288,7 @@ static NSString *_cellIdentifier = @"collectionViewCell";
     
     if ((currentPage < self.photos.count -1) || self.photos.count == 1) {
         tempF.origin.x = 0;
-    }else{
+    }else if(scrollView.isDragging){
         tempF.origin.x = -ZLPickerColletionViewPadding;
     }
     

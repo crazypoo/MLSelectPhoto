@@ -263,6 +263,7 @@ static NSString *const _identifier = @"toolBarThumbCollectionViewCell";
 
 - (void)preview{
     MLSelectPhotoBrowserViewController *browserVc = [[MLSelectPhotoBrowserViewController alloc] init];
+    [browserVc setValue:@(YES) forKeyPath:@"isEditing"];
     browserVc.photos = self.selectAssets;
     [self.navigationController pushViewController:browserVc animated:YES];
 }
