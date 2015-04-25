@@ -2,7 +2,6 @@ Pod::Spec.new do |s|
   s.name             = "MLSelectPhoto"
   s.version          = "0.1.0"
   s.summary          = "iOS that allows picking multiple photos and videos from user's photo library."
-  s.description      = "iOS that allows picking multiple photos and videos from user's photo library."
   s.homepage         = "https://github.com/MakeZL/MLSelectPhoto"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
@@ -13,7 +12,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'MLSelectPhoto/**/*'
-  s.resource_bundles = {
-    'MLSelectPhoto' => ['MLSelectPhoto/*.png']
-  }
+  s.resource     = "MLSelectPhoto/MLSelectPhoto.bundle"
 end

@@ -4,7 +4,11 @@ Custom select photos iOS Library
 
 ![image](https://github.com/MakeZL/MLSelectPhoto/blob/master/screenshot.gif)
 
+### Pod
+    pod search 'MLSelectPhoto'
+
 ### Use
+###### import "MLSelectPhotoPickerViewController.h"
     // alloc
     MLSelectPhotoPickerViewController *pickerVc = [[MLSelectPhotoPickerViewController alloc] init];
     // Default Push CameraRoll
@@ -21,9 +25,10 @@ Custom select photos iOS Library
     }
     
 
+# Contact
+@weibo : [我的微博](http://weibo.com/makezl/)
     
-    
-## License
+# License
 
 MLSelectPhoto is published under MIT License
 
