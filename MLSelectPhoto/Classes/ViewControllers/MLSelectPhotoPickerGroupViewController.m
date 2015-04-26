@@ -35,7 +35,9 @@
 - (UITableView *)tableView{
     if (!_tableView) {
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        tableView.tableFooterView = [[UIView alloc] init];
         tableView.translatesAutoresizingMaskIntoConstraints = NO;
+        [tableView registerClass:[MLSelectPhotoPickerGroupTableViewCell class] forCellReuseIdentifier:@"cell"];
         tableView.delegate = self;
         [self.view addSubview:tableView];
         self.tableView = tableView;
@@ -79,7 +81,10 @@
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    MLSelectPhotoPickerGroupTableViewCell *cell = [MLSelectPhotoPickerGroupTableViewCell instanceCell];
+    MLSelectPhotoPickerGroupTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[MLSelectPhotoPickerGroupTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
     cell.group = self.groups[indexPath.row];
     
     return cell;

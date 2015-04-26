@@ -19,6 +19,4 @@
  */
 @property (nonatomic , strong) MLSelectPhotoPickerGroup *group;
 
-+ (instancetype) instanceCell;
-
 @end
