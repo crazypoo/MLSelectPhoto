@@ -38,6 +38,7 @@
         tableView.dataSource = self;
         tableView.delegate = self;
         tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        tableView.tableFooterView = [[UIView alloc] init];
         [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
         [self.view addSubview:tableView];
         self.tableView = tableView;

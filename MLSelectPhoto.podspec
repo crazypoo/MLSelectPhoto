@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "MLSelectPhoto"
-  s.version          = "0.2.0"
+  s.version          = "0.3.0"
   s.summary          = "iOS that allows picking multiple photos and videos from user's photo library."
   s.homepage         = "https://github.com/MakeZL/MLSelectPhoto"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"

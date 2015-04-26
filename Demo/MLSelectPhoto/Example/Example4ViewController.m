@@ -35,6 +35,7 @@
         tableView.backgroundColor = [UIColor whiteColor];
         tableView.dataSource = self;
         tableView.delegate = self;
+        tableView.tableFooterView = [[UIView alloc] init];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
         [self.view addSubview:tableView];
