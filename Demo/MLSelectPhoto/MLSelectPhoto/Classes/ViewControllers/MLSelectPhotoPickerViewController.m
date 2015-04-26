@@ -10,7 +10,10 @@
 
 #import "MLSelectPhotoPickerViewController.h"
 #import "MLSelectPhoto.h"
+#import "MLSelectPhotoCommon.h"
 #import "MLSelectPhotoNavigationViewController.h"
+#import "MLSelectPhotoPickerGroupViewController.h"
+#import "MLSelectPhotoPickerDatas.h"
 
 @interface MLSelectPhotoPickerViewController ()
 @property (nonatomic , weak) MLSelectPhotoPickerGroupViewController *groupVc;

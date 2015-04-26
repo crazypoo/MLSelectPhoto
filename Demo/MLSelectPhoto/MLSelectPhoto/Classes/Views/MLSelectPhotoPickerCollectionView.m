@@ -8,10 +8,10 @@
 //
 
 #import "MLSelectPhotoPickerCollectionView.h"
+#import "MLSelectPhotoCommon.h"
 #import "MLSelectPhotoPickerCollectionViewCell.h"
 #import "MLPhotoPickerImageView.h"
 #import "MLSelectPhotoPickerFooterCollectionReusableView.h"
-#import <AssetsLibrary/AssetsLibrary.h>
 #import "MLSelectPhoto.h"
 
 @interface MLSelectPhotoPickerCollectionView () <UICollectionViewDataSource,UICollectionViewDelegate>

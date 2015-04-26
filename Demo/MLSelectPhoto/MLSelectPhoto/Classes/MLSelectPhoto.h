@@ -11,16 +11,12 @@
 #ifndef ZLAssetsPickerDemo_ZLPicker_h
 #define ZLAssetsPickerDemo_ZLPicker_h
 
-#import "MLSelectPhotoPickerAssetsViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "MLSelectPhotoPickerViewController.h"
-#import "MLSelectPhotoPickerDatas.h"
 #import "MLSelectPhotoAssets.h"
-#import "MLSelectPhotoCommon.h"
-#import "UIView+MLExtension.h"
 
 /**
  *
- 
  // Use
  ZLPhotoPickerViewController *pickerVc = [[ZLPhotoPickerViewController alloc] init];
  // 默认显示相册里面的内容SavePhotos

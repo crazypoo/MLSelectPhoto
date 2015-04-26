@@ -8,9 +8,9 @@
 //  Copyright (c) 2015年 com.zixue101.www. All rights reserved.
 //
 
+#import <MediaPlayer/MediaPlayer.h>
 #import "Example4ViewController.h"
 #import "MLSelectPhoto.h"
-#import <MediaPlayer/MediaPlayer.h>
 
 @interface Example4ViewController () <ZLPhotoPickerViewControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 

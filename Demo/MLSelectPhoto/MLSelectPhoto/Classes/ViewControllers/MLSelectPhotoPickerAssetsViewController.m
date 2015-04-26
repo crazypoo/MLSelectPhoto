@@ -8,14 +8,13 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
-
-#import <AssetsLibrary/AssetsLibrary.h>
-#import "MLSelectPhoto.h"
+#import "MLSelectPhotoPickerAssetsViewController.h"
 #import "MLSelectPhotoPickerCollectionView.h"
 #import "MLSelectPhotoPickerGroup.h"
 #import "MLSelectPhotoPickerCollectionViewCell.h"
 #import "MLSelectPhotoPickerFooterCollectionReusableView.h"
 #import "MLSelectPhotoBrowserViewController.h"
+#import "MLSelectPhotoPickerDatas.h"
 
 static CGFloat CELL_ROW = 4;
 static CGFloat CELL_MARGIN = 2;
