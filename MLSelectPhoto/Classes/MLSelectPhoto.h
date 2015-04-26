@@ -11,12 +11,8 @@
 #ifndef ZLAssetsPickerDemo_ZLPicker_h
 #define ZLAssetsPickerDemo_ZLPicker_h
 
-#import "MLSelectPhotoPickerAssetsViewController.h"
 #import "MLSelectPhotoPickerViewController.h"
-#import "MLSelectPhotoPickerDatas.h"
 #import "MLSelectPhotoAssets.h"
-#import "MLSelectPhotoCommon.h"
-#import "UIView+MLExtension.h"
 
 /**
  *

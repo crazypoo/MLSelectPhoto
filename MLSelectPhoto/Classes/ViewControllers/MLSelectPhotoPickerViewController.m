@@ -8,9 +8,12 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "MLSelectPhotoPickerViewController.h"
-#import "MLSelectPhoto.h"
 #import "MLSelectPhotoNavigationViewController.h"
+#import "MLSelectPhotoPickerGroupViewController.h"
+#import "MLSelectPhotoCommon.h"
+#import "MLSelectPhotoAssets.h"
 
 @interface MLSelectPhotoPickerViewController ()
 @property (nonatomic , weak) MLSelectPhotoPickerGroupViewController *groupVc;

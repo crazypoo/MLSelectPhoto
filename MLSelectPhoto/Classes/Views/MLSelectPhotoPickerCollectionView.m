@@ -7,12 +7,12 @@
 //  Copyright (c) 2014年 com.zixue101.www. All rights reserved.
 //
 
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "MLSelectPhotoPickerCollectionView.h"
 #import "MLSelectPhotoPickerCollectionViewCell.h"
 #import "MLPhotoPickerImageView.h"
 #import "MLSelectPhotoPickerFooterCollectionReusableView.h"
-#import <AssetsLibrary/AssetsLibrary.h>
-#import "MLSelectPhoto.h"
+#import "MLSelectPhotoCommon.h"
 
 @interface MLSelectPhotoPickerCollectionView () <UICollectionViewDataSource,UICollectionViewDelegate>
 
